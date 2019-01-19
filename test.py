@@ -3,7 +3,6 @@ import osmnx as ox
 import networkx as nx
 import matplotlib.pyplot as plt
 
-place_name = 'Ogu, Tokyo, Japan'
 #%%
 G = ox.graph_from_bbox(north=35.7556,south=35.7495,west=139.7441,east=139.7531,network_type="drive")
 G_projected = ox.project_graph(G, to_crs={'init': 'epsg:4301'})
