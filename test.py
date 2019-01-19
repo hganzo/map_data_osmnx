@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from shapely.geometry import Point,LineString
 
 
-
 #%%
 def get_nearest_point(G_projected, point):
     edges = ox.graph_to_gdfs(G_projected, nodes=False, edges=True)
@@ -20,11 +19,14 @@ def get_nearest_point(G_projected, point):
             min_point_onRoad=point_onRoad
             min_distance=point.distance(Point(point_onRoad[0],point_onRoad[1]))
             min_index=i
-    return min_distance, min_point_onRoad, (edges["geometry"][min_index].coords[:][0][0],edges["geometry"][min_index].coords[:][0][1]), (edges["geometry"][min_index].coords[:][-1][0],edges["geometry"][min_index].coords[:][-1][1])
+    return min_distance \
+          ,min_point_onRoad \
+          ,(edges["geometry"][min_index].coords[:][0][0], edges["geometry"][min_index].coords[:][0][1]) \
+          ,(edges["geometry"][min_index].coords[:][-1][0], edges["geometry"][min_index].coords[:][-1][1])
 
 
 #%%
-point_x=139.749536; point_y=35.746767
+point_x=139.749946; point_y=35.749867
 point=Point(point_x,point_y)
 
 G = ox.graph_from_bbox(north=35.7556,south=35.7495,west=139.7441,east=139.7531,network_type="drive")
@@ -34,12 +36,10 @@ distance, point_onRoad, node1, node2 = get_nearest_point(G_projected, point)
 
 fig, ax = ox.plot_graph(G_projected, show=False, close=False)
 ax.scatter(point_x, point_y, c='red')
-ax.scatter(node1[0],node1[1],c='pink')
-ax.scatter(node2[0],node2[1],c='green')
-ax.scatter(min_point_onRoad[0],min_point_onRoad[1],c='blue')
+ax.scatter(node1[0], node1[1], c='pink')
+ax.scatter(node2[0], node2[1], c='green')
+ax.scatter(point_onRoad[0], point_onRoad[1], c='blue')
 
-#%%
-edges["geometry"]
 
 
 #%%
