@@ -42,4 +42,3 @@ ax.scatter(point_onRoad[0], point_onRoad[1], c='blue')
 
 
 
-#%%
